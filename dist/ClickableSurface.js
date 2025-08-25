@@ -11,6 +11,7 @@ var Example;
                 const data = new XojoWeb.JSONItem();
                 data.set('posX', ev.offsetX);
                 data.set('posY', ev.offsetY);
+                data.set('buttonIndex', ev.button);
                 this.triggerServerEvent('pressed', data, false);
             });
         }

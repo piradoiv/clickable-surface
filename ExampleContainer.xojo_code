@@ -3,6 +3,7 @@ Begin WebContainer ExampleContainer
    Compatibility   =   ""
    ControlCount    =   0
    ControlID       =   ""
+   CSSClasses      =   ""
    Enabled         =   True
    Height          =   250
    Indicator       =   0
@@ -15,6 +16,7 @@ Begin WebContainer ExampleContainer
    LockRight       =   False
    LockTop         =   True
    LockVertical    =   False
+   PanelIndex      =   0
    ScrollDirection =   0
    TabIndex        =   0
    Top             =   0
@@ -26,6 +28,7 @@ Begin WebContainer ExampleContainer
    Begin WebLabel Label1
       Bold            =   False
       ControlID       =   ""
+      CSSClasses      =   ""
       Enabled         =   True
       FontName        =   ""
       FontSize        =   0.0
@@ -42,6 +45,7 @@ Begin WebContainer ExampleContainer
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   0
       TabStop         =   True
@@ -57,6 +61,7 @@ Begin WebContainer ExampleContainer
    End
    Begin ClickableSurface ClickableSurface1
       ControlID       =   ""
+      CSSClasses      =   ""
       Enabled         =   True
       Height          =   250
       Index           =   -2147483648
@@ -69,6 +74,7 @@ Begin WebContainer ExampleContainer
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   1
       TabStop         =   True
@@ -86,15 +92,20 @@ End
 
 #tag Events ClickableSurface1
 	#tag Event
-		Sub Pressed(posX As Integer, posY As Integer)
-		  #Pragma Unused posX
-		  #Pragma Unused posY
-		  
-		  MessageBox("Pressed!")
+		Sub Pressed(posX As Integer, posY As Integer, buttonIndex As Integer)
+		  MessageBox("Pressed! X: " + posX.ToString + ", Y: " + posY.ToString + ", Button Index: " + buttonIndex.ToString)
 		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="PanelIndex"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="_mPanelIndex"
 		Visible=false

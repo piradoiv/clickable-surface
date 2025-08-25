@@ -2,7 +2,7 @@
 Protected Class ClickableSurface
 Inherits WebSDKUIControl
 	#tag Event
-		Sub DrawControlInLayoutEditor(g as graphics)
+		Sub DrawControlInLayoutEditor(g As Graphics)
 		  g.DrawingColor = &c000000EE
 		  g.FillRectangle(0, 0, g.Width, g.Height)
 		  
@@ -12,16 +12,19 @@ Inherits WebSDKUIControl
 	#tag EndEvent
 
 	#tag Event
-		Function ExecuteEvent(name as string, parameters as JSONItem) As Boolean
+		Function ExecuteEvent(name As String, parameters As JSONItem) As Boolean
 		  Select Case name
 		  Case "pressed"
-		    RaiseEvent Pressed(parameters.Lookup("posX",  0), parameters.Lookup("posY", 0))
+		    Var x As Integer = parameters.Lookup("posX",  0)
+		    Var y As Integer = parameters.Lookup("posY",  0)
+		    Var buttonIndex As Integer = parameters.Lookup("buttonIndex",  0)
+		    RaiseEvent Pressed(x, y, buttonIndex)
 		  End Select
 		End Function
 	#tag EndEvent
 
 	#tag Event
-		Function HandleRequest(Request As WebRequest, Response As WebResponse) As Boolean
+		Function HandleRequest(request As WebRequest, response As WebResponse) As Boolean
 		  // Ignored
 		  #Pragma Unused Request
 		  #Pragma Unused Response
@@ -42,28 +45,28 @@ Inherits WebSDKUIControl
 	#tag EndEvent
 
 	#tag Event
-		Sub Serialize(js as JSONItem)
+		Sub Serialize(js As JSONItem)
 		  // Ignored
 		  #Pragma Unused js
 		End Sub
 	#tag EndEvent
 
 	#tag Event
-		Function SessionCSSURLs(session as WebSession) As String()
+		Function SessionCSSURLs(session As WebSession) As String()
 		  // Ignored
 		  #Pragma Unused session
 		End Function
 	#tag EndEvent
 
 	#tag Event
-		Function SessionHead(session as WebSession) As String
+		Function SessionHead(session As WebSession) As String
 		  // Ignored
 		  #Pragma Unused session
 		End Function
 	#tag EndEvent
 
 	#tag Event
-		Function SessionJavascriptURLs(session as WebSession) As String()
+		Function SessionJavascriptURLs(session As WebSession) As String()
 		  #Pragma Unused session
 		  
 		  Static mJSFile As WebFile
@@ -86,15 +89,23 @@ Inherits WebSDKUIControl
 	#tag EndHook
 
 	#tag Hook, Flags = &h0
-		Event Pressed(posX As Integer, posY As Integer)
+		Event Pressed(posX As Integer, posY As Integer, buttonIndex As Integer)
 	#tag EndHook
 
 
-	#tag Constant, Name = kJavaScript, Type = String, Dynamic = False, Default = \"\"use strict\";\nvar Example;\n(function (Example) {\n    class ClickableSurface extends XojoWeb.XojoVisualControl {\n        constructor(id\x2C events) {\n            super(id\x2C events);\n            const el \x3D this.DOMElement(\'\');\n            if (!el)\n                return;\n            el.addEventListener(\'pointerup\'\x2C (ev) \x3D> {\n                const data \x3D new XojoWeb.JSONItem();\n                data.set(\'posX\'\x2C ev.offsetX);\n                data.set(\'posY\'\x2C ev.offsetY);\n                this.triggerServerEvent(\'pressed\'\x2C data\x2C false);\n            });\n        }\n        updateControl(data) {\n            super.updateControl(data);\n            this.refresh();\n        }\n        render() {\n            super.render();\n            const el \x3D this.DOMElement(\'\');\n            if (!el)\n                return;\n            this.setAttributes(el);\n            el.style.display \x3D this.mEnabled && this.mVisible \? \'block\' : \'none\';\n            this.applyTooltip(el);\n            this.applyUserStyle(el);\n        }\n    }\n    Example.ClickableSurface \x3D ClickableSurface;\n})(Example || (Example \x3D {}));\n", Scope = Private
+	#tag Constant, Name = kJavaScript, Type = String, Dynamic = False, Default = \"\"use strict\";\nvar Example;\n(function (Example) {\n    class ClickableSurface extends XojoWeb.XojoVisualControl {\n        constructor(id\x2C events) {\n            super(id\x2C events);\n            const el \x3D this.DOMElement(\'\');\n            if (!el)\n                return;\n            el.addEventListener(\'pointerup\'\x2C (ev) \x3D> {\n                const data \x3D new XojoWeb.JSONItem();\n                data.set(\'posX\'\x2C ev.offsetX);\n                data.set(\'posY\'\x2C ev.offsetY);\n                data.set(\'buttonIndex\'\x2C ev.button);\n                this.triggerServerEvent(\'pressed\'\x2C data\x2C false);\n            });\n        }\n        updateControl(data) {\n            super.updateControl(data);\n            this.refresh();\n        }\n        render() {\n            super.render();\n            const el \x3D this.DOMElement(\'\');\n            if (!el)\n                return;\n            this.setAttributes(el);\n            el.style.display \x3D this.mEnabled && this.mVisible \? \'block\' : \'none\';\n            this.applyTooltip(el);\n            this.applyUserStyle(el);\n        }\n    }\n    Example.ClickableSurface \x3D ClickableSurface;\n})(Example || (Example \x3D {}));", Scope = Private
 	#tag EndConstant
 
 
 	#tag ViewBehavior
+		#tag ViewProperty
+			Name="PanelIndex"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Integer"
+			EditorType=""
+		#tag EndViewProperty
 		#tag ViewProperty
 			Name="_mPanelIndex"
 			Visible=false

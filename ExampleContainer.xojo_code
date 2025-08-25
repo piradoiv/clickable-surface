@@ -67,11 +67,11 @@ Begin WebContainer ExampleContainer
       Index           =   -2147483648
       Indicator       =   0
       Left            =   0
-      LockBottom      =   False
+      LockBottom      =   True
       LockedInPosition=   False
       LockHorizontal  =   False
       LockLeft        =   True
-      LockRight       =   False
+      LockRight       =   True
       LockTop         =   True
       LockVertical    =   False
       PanelIndex      =   0
@@ -88,6 +88,13 @@ End
 #tag EndWebContainerControl
 
 #tag WindowCode
+	#tag Event
+		Sub Opening()
+		  Me.Style.BackgroundColor = Color.LightGray
+		End Sub
+	#tag EndEvent
+
+
 #tag EndWindowCode
 
 #tag Events ClickableSurface1

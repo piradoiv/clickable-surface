@@ -4,6 +4,7 @@ Begin WebPage WebPage1
    Compatibility   =   ""
    ControlCount    =   0
    ControlID       =   ""
+   CSSClasses      =   ""
    Enabled         =   False
    Height          =   400
    ImplicitInstance=   True
@@ -21,6 +22,8 @@ Begin WebPage WebPage1
    LockVertical    =   False
    MinimumHeight   =   400
    MinimumWidth    =   600
+   PanelIndex      =   0
+   ScaleFactor     =   0.0
    TabIndex        =   0
    Title           =   "Untitled"
    Top             =   0
@@ -30,33 +33,63 @@ Begin WebPage WebPage1
    _mDesignHeight  =   0
    _mDesignWidth   =   0
    _mPanelIndex    =   -1
-   Begin ExampleContainer ExampleContainer1
-      ControlCount    =   0
+   Begin WebLabel Label1
+      Bold            =   False
       ControlID       =   ""
+      CSSClasses      =   ""
       Enabled         =   True
-      Height          =   250
+      FontName        =   ""
+      FontSize        =   0.0
+      Height          =   400
       Index           =   -2147483648
-      Indicator       =   0
-      LayoutDirection =   0
-      LayoutType      =   0
-      Left            =   62
-      LockBottom      =   False
+      Indicator       =   ""
+      Italic          =   False
+      Left            =   0
+      LockBottom      =   True
       LockedInPosition=   False
       LockHorizontal  =   False
       LockLeft        =   True
-      LockRight       =   False
+      LockRight       =   True
       LockTop         =   True
       LockVertical    =   False
+      Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
-      ScrollDirection =   0
-      TabIndex        =   0
+      TabIndex        =   1
+      TabStop         =   True
+      Text            =   "Click somewhere"
+      TextAlignment   =   2
+      TextColor       =   &c000000FF
+      Tooltip         =   ""
+      Top             =   0
+      Underline       =   False
+      Visible         =   True
+      Width           =   600
+      _mPanelIndex    =   -1
+   End
+   Begin ClickableSurface ClickableSurface1
+      ControlID       =   ""
+      CSSClasses      =   ""
+      Enabled         =   True
+      Height          =   400
+      Index           =   -2147483648
+      Indicator       =   ""
+      Left            =   0
+      LockBottom      =   True
+      LockedInPosition=   False
+      LockHorizontal  =   False
+      LockLeft        =   True
+      LockRight       =   True
+      LockTop         =   True
+      LockVertical    =   False
+      PanelIndex      =   0
+      Scope           =   2
+      TabIndex        =   2
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   50
+      Top             =   0
       Visible         =   True
-      Width           =   250
-      _mDesignHeight  =   0
-      _mDesignWidth   =   0
+      Width           =   600
       _mPanelIndex    =   -1
    End
 End
@@ -65,7 +98,30 @@ End
 #tag WindowCode
 #tag EndWindowCode
 
+#tag Events ClickableSurface1
+	#tag Event
+		Sub Pressed(posX As Integer, posY As Integer, buttonIndex As Integer)
+		  MessageBox("Pressed at x: " + posX.ToString + " y: " + posY.ToString + " buttonIndex: " + buttonIndex.ToString)
+		End Sub
+	#tag EndEvent
+#tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="PanelIndex"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="ScaleFactor"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Double"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="ControlCount"
 		Visible=false

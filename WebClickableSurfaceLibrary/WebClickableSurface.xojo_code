@@ -1,5 +1,5 @@
 #tag Class
-Protected Class ClickableSurface
+Protected Class WebClickableSurface
 Inherits WebSDKUIControl
 	#tag Event
 		Sub DrawControlInLayoutEditor(g As Graphics)

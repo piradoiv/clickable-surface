@@ -67,7 +67,7 @@ Begin WebPage WebPage1
       Width           =   600
       _mPanelIndex    =   -1
    End
-   Begin ClickableSurface ClickableSurface1
+   Begin WebClickableSurface ClickableSurface
       ControlID       =   ""
       CSSClasses      =   ""
       Enabled         =   True
@@ -98,7 +98,7 @@ End
 #tag WindowCode
 #tag EndWindowCode
 
-#tag Events ClickableSurface1
+#tag Events ClickableSurface
 	#tag Event
 		Sub Pressed(posX As Integer, posY As Integer, buttonIndex As Integer)
 		  MessageBox("Pressed at x: " + posX.ToString + " y: " + posY.ToString + " buttonIndex: " + buttonIndex.ToString)
